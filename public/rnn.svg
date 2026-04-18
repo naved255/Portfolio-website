@@ -1,0 +1,36 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+  <defs>
+    <linearGradient id="rnnGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Nodes -->
+  <circle cx="30" cy="50" r="6" fill="url(#rnnGrad)"/>
+  <circle cx="50" cy="50" r="6" fill="url(#rnnGrad)"/>
+  <circle cx="70" cy="50" r="6" fill="url(#rnnGrad)"/>
+
+  <!-- Forward Connections -->
+  <line x1="36" y1="50" x2="44" y2="50" stroke="url(#rnnGrad)" stroke-width="2"/>
+  <line x1="56" y1="50" x2="64" y2="50" stroke="url(#rnnGrad)" stroke-width="2"/>
+
+  <!-- Recurrent Loop -->
+  <path 
+    d="M50 44 
+       C70 20, 90 80, 50 56" 
+    stroke="url(#rnnGrad)" 
+    stroke-width="2" 
+    fill="none"
+  />
+
+  <!-- Arrow head -->
+  <polygon points="48,56 54,56 51,62" fill="url(#rnnGrad)"/>
+
+  <!-- Label -->
+  <text x="50" y="85" text-anchor="middle" fill="#E0E7FF" font-size="10" font-weight="bold">
+    RNN
+  </text>
+
+</svg>

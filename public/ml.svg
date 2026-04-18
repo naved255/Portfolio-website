@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <circle cx="50" cy="50" r="40" fill="#4A90E2" stroke="#357ABD" stroke-width="3"/>
+  <text x="50" y="55" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">ML</text>
+  <circle cx="30" cy="30" r="8" fill="#7BB13F"/>
+  <circle cx="70" cy="30" r="8" fill="#7BB13F"/>
+  <circle cx="30" cy="70" r="8" fill="#7BB13F"/>
+  <circle cx="70" cy="70" r="8" fill="#7BB13F"/>
+  <path d="M20 50 Q50 40 80 50 Q50 60 20 50" stroke="#F5A623" stroke-width="4" fill="none"/>
+</svg>
