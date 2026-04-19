@@ -18,6 +18,7 @@ export const skillsData = [
     category: "Database",
     items: [
       { title: "MongoDB", icon: "/mongo.svg" },
+      {title: "MySQL", icon: "/sql.svg"}
     ],
   },
   {
