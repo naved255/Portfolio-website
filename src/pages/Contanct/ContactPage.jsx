@@ -1,117 +1,200 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Mail, ArrowUpRight, Copy, Check, MessageSquare, Sparkles, Send } from 'lucide-react'
 import Form from './Form'
+import {CustomCursor, THEME } from '../../CustomCursor'
+
+// 🔹 SVGs for reliable social icon rendering
+const GithubIcon = (props) => (
+  <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+)
+
+const LinkedinIcon = (props) => (
+  <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+)
+
+const contactCards = [
+  {
+    title: 'Email',
+    value: 'navedahmad2314lko@gmail.com',
+    link: 'mailto:navedahmad2314lko@gmail.com',
+    icon: Mail,
+    color: 'text-blue-400',
+    bgGlow: 'from-blue-500/20 to-indigo-500/5',
+    isCopyable: true,
+  },
+  {
+    title: 'GitHub',
+    value: 'github.com/naved255',
+    link: 'https://github.com/naved255',
+    icon: GithubIcon,
+    color: 'text-purple-400',
+    bgGlow: 'from-purple-500/20 to-pink-500/5',
+    isCopyable: false,
+  },
+  {
+    title: 'LinkedIn',
+    value: 'linkedin.com/in/mohd-naved-ahmad',
+    link: 'https://www.linkedin.com/in/mohd-naved-ahmad-6a643231b/',
+    icon: LinkedinIcon,
+    color: 'text-cyan-400',
+    bgGlow: 'from-cyan-500/20 to-blue-500/5',
+    isCopyable: false,
+  },
+]
 
 const ContactPage = () => {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyEmail = (e, email) => {
+    e.preventDefault()
+    e.stopPropagation()
+    navigator.clipboard.writeText(email)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
   return (
-    <div className='max-w-6xl mx-auto px-4'>
-
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 overflow-hidden">
+      <CustomCursor/>
       {/* 🔥 Hero Section */}
-      <section className='text-center mt-16 mb-20 relative'>
-        
+      <section className="text-center py-6 mt-8 sm:mt-12 md:mt-16 mb-12 sm:mb-16 relative">
         {/* Glow Effects */}
-        <div className='absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-purple-500/20 blur-3xl rounded-full'></div>
-        <div className='absolute bottom-0 left-1/3 w-72 h-72 bg-blue-500/20 blur-3xl rounded-full'></div>
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-64 sm:w-96 h-64 sm:h-96 bg-purple-600/20 blur-3xl rounded-full -z-10"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          className="absolute bottom-0 left-1/3 w-64 sm:w-80 h-64 sm:h-80 bg-blue-600/20 blur-3xl rounded-full -z-10"
+        />
 
-        <p className='text-textmain/60 mb-2 tracking-wide'>
-          Get In Touch
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4 text-xs sm:text-sm"
+        >
+          <Sparkles className="w-4 h-4 text-purple-400" />
+          <span className={THEME.textMuted}>Available for opportunities</span>
+        </motion.div>
 
-        <h1 className='text-4xl md:text-5xl font-bold mb-4'>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-4"
+        >
           Let’s{' '}
-          <span className='text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600'>
-            Connect
+          <span className={`text-transparent bg-clip-text bg-gradient-to-r ${THEME.primaryGradient}`}>
+            Connect & Collaborate
           </span>
-        </h1>
+        </motion.h1>
 
-        <p className='text-textmain/70 max-w-xl mx-auto text-lg'>
-          Have a project idea, collaboration, or opportunity? Feel free to reach out.
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className={`text-sm sm:text-base md:text-lg ${THEME.textMuted} max-w-md sm:max-w-xl mx-auto leading-relaxed`}
+        >
+          Whether you have a groundbreaking idea, an open role, or just want to discuss modern web stack & AI developments—my inbox is always open.
+        </motion.p>
       </section>
 
-      {/* 📬 Contact Cards */}
-      <section className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-20'>
-
-        {/* Email */}
-        <a
-          href='mailto:navedahmad2314lko@gmail.com'
-          className='bg-card border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:border-purple-500/50 transition-all hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-500/10'
-        >
-          <div className='text-3xl mb-3'>📧</div>
-          <h3 className='text-lg font-bold text-textmain'>Email</h3>
-          <p className='text-textmain/60 text-sm mt-2'>
-            navedahmad2314lko@gmail.com
-          </p>
-        </a>
-
-        {/* GitHub */}
-        <a
-          href='https://github.com/naved255'
-          target='_blank'
-          rel='noreferrer'
-          className='bg-card border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:border-purple-500/50 transition-all hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-500/10'
-        >
-          <div className='text-3xl mb-3'><svg className='w-7 h-7 text-textmain' fill='currentColor' viewBox='0 0 24 24'><path d='M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z'/></svg>
-</div>
-          <h3 className='text-lg font-bold text-textmain'>GitHub</h3>
-          <p className='text-textmain/60 text-sm mt-2'>
-            github.com/naved255
-          </p>
-        </a>
-
-        {/* LinkedIn */}
-        <a
-          href='https://www.linkedin.com/in/mohd-naved-ahmad-6a643231b/'
-          target='_blank'
-          rel='noreferrer'
-          className='bg-card border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:border-purple-500/50 transition-all hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-500/10'
-        >
-          <div className='text-3xl mb-3'><svg className='w-7 h-7 text-textmain' fill='currentColor' viewBox='0 0 24 24'><path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/></svg>
-</div>
-          <h3 className='text-lg font-bold text-textmain'>LinkedIn</h3>
-          <p className='text-textmain/60 text-sm mt-2'>
-            linkedin.com/in/naved
-          </p>
-        </a>
-
-      </section>
-
-      {/* 📝 Contact Form (Optional but recommended) */}
-      {/* <section className='mb-24'>
-        <div className='bg-card border border-white/10 rounded-3xl p-8 md:p-12 max-w-3xl mx-auto'>
-          
-          <h2 className='text-2xl font-bold mb-6 text-center'>
-            Send a Message
-          </h2>
-
-          <form className='flex flex-col gap-4'>
-            <input
-              type='text'
-              placeholder='Your Name'
-              className='p-3 rounded-lg bg-transparent border border-white/10 focus:border-purple-500 outline-none'
-            />
-            <input
-              type='email'
-              placeholder='Your Email'
-              className='p-3 rounded-lg bg-transparent border border-white/10 focus:border-purple-500 outline-none'
-            />
-            <textarea
-              rows='4'
-              placeholder='Your Message'
-              className='p-3 rounded-lg bg-transparent border border-white/10 focus:border-purple-500 outline-none'
-            ></textarea>
-
-            <button
-              type='submit'
-              className='mt-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all hover:-translate-y-1'
+      {/* 📬 Interactive Contact Cards Grid */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+        }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 mb-16 sm:mb-20"
+      >
+        {contactCards.map((card, idx) => {
+          const IconComponent = card.icon
+          return (
+            <motion.div
+              key={idx}
+              variants={{
+                hidden: { opacity: 0, y: 25 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className={`group relative bg-card border ${THEME.cardBorder} rounded-2xl p-6 flex flex-col justify-between hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 overflow-hidden`}
             >
-              Send Message
-            </button>
-          </form>
+              {/* Card Ambient Glow */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${card.bgGlow} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`} />
 
-        </div>
-      </section> */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className={`p-3 rounded-xl bg-white/5 border border-white/10 ${card.color} group-hover:scale-110 transition-transform duration-300`}>
+                    <IconComponent className="w-5 h-5" />
+                  </div>
 
-      <Form/>
+                  <a
+                    href={card.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2 rounded-lg bg-white/5 text-textmain/50 hover:text-white hover:bg-white/10 transition-colors"
+                    aria-label={`Open ${card.title}`}
+                  >
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
+
+                <h3 className="text-lg font-bold text-white mb-1">{card.title}</h3>
+                <p className="text-xs sm:text-sm text-textmain/70 truncate">{card.value}</p>
+              </div>
+
+              {/* Action area */}
+              <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+                <a
+                  href={card.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs font-semibold text-purple-400 group-hover:text-purple-300 transition-colors flex items-center gap-1"
+                >
+                  Visit Link
+                </a>
+
+                {card.isCopyable && (
+                  <button
+                    onClick={(e) => handleCopyEmail(e, card.value)}
+                    className="inline-flex items-center gap-1.5 text-xs text-textmain/60 hover:text-white px-2.5 py-1 rounded-md bg-white/5 hover:bg-white/10 transition-all"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-green-400" />
+                        <span className="text-green-400">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          )
+        })}
+      </motion.section>
+
+      {/* 📝 Contact Form */}
+      <Form />
 
     </div>
   )
