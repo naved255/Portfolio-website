@@ -91,7 +91,7 @@ const Hero = () => {
           <motion.a
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            href="/project"
+            href="/projects"
             className={`px-6 py-3 text-sm sm:text-base ${THEME.btnGradient} text-white font-semibold rounded-full shadow-lg ${THEME.btnShadow} transition-all duration-300 inline-flex items-center gap-2`}
           >
             <span>View My Work</span>
