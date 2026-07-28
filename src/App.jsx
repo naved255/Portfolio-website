@@ -19,6 +19,7 @@ function App() {
       <div className="relative z-10 flex flex-col justify-between min-h-screen">
         <div>
           <Navbar />
+          <div className="h-20"></div>
 
           <Routes>
             <Route path='/' element={<HomePage />} />
